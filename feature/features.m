@@ -1,4 +1,4 @@
-function [xTrainD, yTrainD, xCVD, yCVD, xTestD] = features(path)    
+function [xTrain, yTrain, xCV, yCV, xTest, Test_projectid, features_name, response_name] = features(path)    
     
     %%
     %read the data
@@ -17,6 +17,7 @@ function [xTrainD, yTrainD, xCVD, yCVD, xTestD] = features(path)
     %%
     %extract all kinds of features
     %Use the following as example
+	%call function to extract features
     essay_data.need_statement_length = cellfun(@length, essay_data.need_statement);
     essay_data.essay_length = cellfun(@length, essay_data.essay);
     essay_data.need_statement = [];
@@ -62,34 +63,6 @@ function [xTrainD, yTrainD, xCVD, yCVD, xTestD] = features(path)
     xCV = Training_Data(test(cv_id), features_name);
     yCV = Training_Data(test(cv_id), response_name);
     
-    xTest = Test_Data;
-    
-    %%
-    %Convert the features
-    xTrainD = zeros(height(xTrain),length(features_name));
-    xCVD = zeros(height(xCV),length(features_name));
-    xTestD = zeros(height(xTest),length(features_name));
-    
-    for j = 1:length(features_name)
-        xTrainD(:,j) = double(xTrain.(features_name{j}));
-        xCVD(:,j) = double(xCV.(features_name{j}));
-        xTestD(:, j) = double(xTest.(features_name{j}));
-    end
-    
-    clear xTrain xCV xTest;
-    
-    %%
-    %convert the label
-    yTrainC = table2array(yTrain);
-    yCVC = table2array(yCV);
-    
-    yTrainD = zeros(length(yTrainC), 1);
-    yTrainD(yTrainC == 't') = 1;
-    yTrainD(yTrainC == 'f') = -1;
-    
-    yCVD = zeros(length(yCVC), 1);
-    yCVD(yCVC == 't') = 1;
-    yCVD(yCVC == 'f') = -1;
-    
-    clear yTrain yCV yTrainC yCVC;
+    xTest = Test_Data(:, features_name);
+    Test_projectid = Test_Data.projectid;
 end
