@@ -3,27 +3,52 @@ function [xTrain, yTrain, xCV, yCV, xTest, Test_projectid, features_name, respon
     %%
     %read the data
     %the feature needed to be read
-    project_attribute = {'projectid', 'school_charter',...
-        'primary_focus_subject','total_price_including_optional_support',...
-        'students_reached','date_posted'};
+    project_attribute = {'projectid', 'school_charter', 'school_magnet',...
+        'school_year_round','school_nlns','school_kipp','school_charter_ready_promise',...
+        'teacher_prefix','teacher_teach_for_america','teacher_ny_teaching_fellow',...
+        'primary_focus_subject','primary_focus_area','secondary_focus_subject',...
+        'secondary_focus_area','resource_type','poverty_level','grade_level',...
+        'fulfillment_labor_materials','students_reached',...
+        'total_price_excluding_optional_support', 'total_price_including_optional_support',...
+        'eligible_double_your_impact_match','eligible_almost_home_match',...
+        'date_posted'};
+    
+    %%essay attribute
     essay_attribute = {'projectid','need_statement','essay'};
-    outcome_attribute = {'projectid','is_exciting'};
+    
+    %%
+    %outcome attribute all is binary true or false
+    outcome_attribute = {'projectid','is_exciting', 'fully_funded', ...
+        'at_least_1_green_donation','great_chat','three_or_more_non_teacher_referred_donors',...
+        'one_non_teacher_referred_donor_giving_100_plus','donation_from_thoughtful_donor'};
+    
+    %%
+    %donation attribute not known how to use these
     donation_attribute = {'projectid','donation_total'};
 
+    if exist([path, '\data.mat']) == 2
+        load([path, '\data.mat']);
+        essay_data = Load_Essays(essay_attribute, path);
+        disp('Load Finish\n');
+    else
     [project_data, outcome_data, essay_data, donation_data] = load_data(path, project_attribute, essay_attribute,...
         outcome_attribute, donation_attribute);
-    
+    end
     
     %%
     %extract all kinds of features
     %Use the following as example
 	%call function to extract features
+%     project_data.is_charter = (project_data.school_charter == 't');
+%     project_data.not_charter = (project_data.school_charter == 'f');
+    
+    [project_data, outcome_data, essay_data, donation_data, features_name] = ...
+    basic(project_data, outcome_data, essay_data, donation_data);
+
     essay_data.need_statement_length = cellfun(@length, essay_data.need_statement);
     essay_data.essay_length = cellfun(@length, essay_data.essay);
     essay_data.need_statement = [];
     essay_data.essay = [];
-    
-    
     
     %%
     %Merge the files
@@ -49,9 +74,8 @@ function [xTrain, yTrain, xCV, yCV, xTest, Test_projectid, features_name, respon
     
     %%
     %select the features and predict label
-    features_name = {'school_charter','primary_focus_subject',...
-    'total_price_including_optional_support','students_reached',...
-    'need_statement_length','essay_length'};
+    features_name = {features_name{:}, 'total_price_including_optional_support','students_reached',...
+     'need_statement_length','essay_length'};
     response_name = {'is_exciting'};
     
     %%

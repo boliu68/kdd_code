@@ -52,6 +52,121 @@ Input:
 
 ```
 
+----
+
+##Feature List
+```
+1. is_charter
+2. not_charter
+3. is_magnet
+4. not_charter
+5. is_year_round
+6. not_year_round
+7. is_nlns
+8. not_nlns
+9. is_kipp
+10. not_kipp
+11. is_charter_ready
+12. not_charter_ready
+13. teacher_prefix_Dr
+14. teacher_prefix_Mr
+15. teacher_prefix_MrMrs
+16. teacher_prefix_Mrs
+17. teacher_prefix_Ms
+18. is_teacher_america
+19. not_teacher_america
+20. is_ny_fellow
+21. not_ny_fellow
+22. primary_sub_ppliedSciences
+23. primary_sub_ChrcterEduction
+24. primary_sub_CivicsGovernment
+25. primary_sub_CollegeCreerPrep
+26. primary_sub_CommunityService
+27. primary_sub_ESL
+28. primary_sub_ErlyDevelopment
+29. primary_sub_Economics
+30. primary_sub_EnvironmentlScience
+31. primary_sub_Extrcurriculr
+32. primary_sub_ForeignLnguges
+33. primary_sub_GymFitness
+34. primary_sub_HelthLifeScience
+35. primary_sub_HelthWellness
+36. primary_sub_HistoryGeogrphy
+37. primary_sub_Litercy
+38. primary_sub_LitertureWriting
+39. primary_sub_Mthemtics
+40. primary_sub_Music
+41. primary_sub_Nutrition
+42. primary_sub_Other
+43. primary_sub_PrentInvolvement
+44. primary_sub_Performingrts
+45. primary_sub_SocilSciences
+46. primary_sub_SpecilNeeds
+47. primary_sub_Sports
+48. primary_sub_Visulrts
+49. primary_area_ppliedLerning
+50. primary_area_HelthSports
+51. primary_area_HistoryCivics
+52. primary_area_LitercyLnguge
+53. primary_area_MthScience
+54. primary_area_MusicTherts
+55. primary_area_SpecilNeeds
+56. second_sub_ppliedSciences
+57. second_sub_ChrcterEduction
+58. second_sub_CivicsGovernment
+59. second_sub_CollegeCreerPrep
+60. second_sub_CommunityService
+61. second_sub_ESL
+62. second_sub_ErlyDevelopment
+63. second_sub_Economics
+64. second_sub_EnvironmentlScience
+65. second_sub_Extrcurriculr
+66. second_sub_ForeignLnguges
+67. second_sub_GymFitness
+68. second_sub_HelthLifeScience
+69. second_sub_HelthWellness
+70. second_sub_HistoryGeogrphy
+71. second_sub_Litercy
+72. second_sub_LitertureWriting
+73. second_sub_Mthemtics
+74. second_sub_Music
+75. second_sub_Nutrition
+76. second_sub_Other
+77. second_sub_PrentInvolvement
+78. second_sub_Performingrts
+79. second_sub_SocilSciences
+80. second_sub_SpecilNeeds
+81. second_sub_Sports
+82. second_sub_Visulrts
+83. second_area_ppliedLerning
+84. second_area_HelthSports
+85. second_area_HistoryCivics
+86. second_area_LitercyLnguge
+87. second_area_MthScience
+88. second_area_MusicTherts
+89. second_area_SpecilNeeds
+90. res_type_Books
+91. res_type_Other
+92. res_type_Supplies
+93. res_type_Technology
+94. res_type_Trips
+95. res_type_Visitors
+96. num_poverty
+97. grade_level_Grdes35
+98. grade_level_Grdes68
+99. grade_level_Grdes12
+100. grade_level_GrdesPreK2
+101. fulfillment_labor_materials
+102. is_double_match
+103. not_double_match
+104. is_home_match
+105. not_home_match
+106. total_price_including_optional_support
+107. students_reached
+108. need_statement_length
+109. essay_length
+```
+
 
 
 > Written with [StackEdit](https://stackedit.io/).

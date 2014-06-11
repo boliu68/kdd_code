@@ -1,4 +1,4 @@
-function [xTrainD, yTrainD, xCVD, yCVD, xTestD, Test_projectid] = num_features(path)    
+function [xTrainD, yTrainD, xCVD, yCVD, xTestD, Test_projectid, features_name] = num_features(path)    
 
     [xTrain, yTrain, xCV, yCV, xTest, Test_projectid, features_name, response_name]...
         = features(path);
