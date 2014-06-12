@@ -36,7 +36,7 @@ for i = 1:length(varNamesToImport)
 end
 
 %% Load the data
-dataFormat = '%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q';
+dataFormat = '%q%q%q%f%f%f%q%q%f%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q%q%f%f%f%f%q%q%q';
 % Modify format string to only import requested columns
 dataFormat = cellstr(reshape(dataFormat,2,[])');
 varsNotImported = setxor(allVars,varsToImport);
@@ -63,8 +63,8 @@ if ismember('date_posted',varNamesToImport)
 end
 
 % Save memory - categorical variables
-categoricalVars = [2:20 27 28];%[8:10 13:28 33 34];
-ordinalVars = [21 22];%[27 28];
+categoricalVars = [8:10 13:28 33 34];
+ordinalVars = [27 28];
 for j = 1:length(categoricalVars)
     ismem = ismember(categoricalVars(j),varsToImport);
     if ismem
