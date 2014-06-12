@@ -23,7 +23,7 @@ for i = 1:length(varNamesToImport)
 end
 
 %% Load the data
-dataFormat = '%q%q%q%q%q%q%q%q%q%f%f%f';
+dataFormat = '%q%q%q%q%q%q%q%q%q%q%q%q';
 % Modify format string to only import requested columns
 dataFormat = cellstr(reshape(dataFormat,2,[])');
 varsNotImported = setxor(allVars,varsToImport);
