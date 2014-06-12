@@ -37,12 +37,11 @@ function [project_data, outcome_data, essay_data, donation_data] = load_data(pat
 %     'eligible_double_your_impact_match' ,'eligible_almost_home_match' ,'date_posted' };  
 %     %
 %     %preprocessing
-
     project_data = Load_Projects(project_attribute, path);
     essay_data = Load_Essays(essay_attribute, path);
     outcome_data = Load_Outcomes(outcome_attribute, path);
     donation_data = Load_Donations(donation_attribute, path);
-
+    
     %sort the tables
     project_data = sortrows(project_data, 'projectid');
     essay_data = sortrows(essay_data, 'projectid');
