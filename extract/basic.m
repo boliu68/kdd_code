@@ -15,10 +15,9 @@ function [project_data, outcome_data, essay_data, donation_data, feature_name] =
     feature_name = [feature_name, {'is_charter'}];
     feature_name = [feature_name, {'not_charter'}];
     
-    
     project_data.is_magnet = (project_data.school_magnet == 't');
     project_data.not_magnet = (project_data.school_magnet == 'f');
-    project_data.school_magnent = [];
+    project_data.school_magnet = [];
     feature_name = [feature_name, {'is_magnet'}];
     feature_name = [feature_name, {'not_magnet'}];
     
@@ -50,8 +49,10 @@ function [project_data, outcome_data, essay_data, donation_data, feature_name] =
     %feature of city
     unique_city = unique(project_data.school_city);
     hist_sum = [];
+    cate = categorical(project_data.school_city);
+    
     for i = 1:length(unique_city)
-        hist_sum = [hist_sum, sum(project_data.school_city == unique_city(i))];
+        hist_sum = [hist_sum, sum(cate == (unique_city(i)))];
     end
     
     %choose top 14 city whose hist_sum > 5000
@@ -63,8 +64,8 @@ function [project_data, outcome_data, essay_data, donation_data, feature_name] =
            prefix_name = keep_caps(top_city(i));
            prefix_name = strcat('top_city', prefix_name);
 
-           eval(['project_data.',prefix_name,' = (project_data.school_city == top_city(i));']);
-           not_top_city_id = (not_top_city_id & ~(project_data.school_city == top_city(i)));
+           eval(['project_data.',prefix_name,' = (cate == (top_city(i)));']);
+           not_top_city_id = (not_top_city_id & ~(cate == (top_city(i))));
            feature_name = [feature_name, {prefix_name}];
        end
     end
@@ -73,7 +74,7 @@ function [project_data, outcome_data, essay_data, donation_data, feature_name] =
     project_data.not_top_city = not_top_city_id;
     project_data.school_city = [];
     
-    clear hist_sum unique_city top_city miss_prefix prefix_name not_top_city_id;
+    clear cate hist_sum unique_city top_city miss_prefix prefix_name not_top_city_id;
     
     
     %%
@@ -96,8 +97,9 @@ function [project_data, outcome_data, essay_data, donation_data, feature_name] =
     %district data
     unique_district = unique(project_data.school_district);
     hist_sum = [];
+    cate = categorical(project_data.school_district);
     for i = 1:length(unique_district)
-        hist_sum = [hist_sum, sum(project_data.school_district == unique_district(i))];
+        hist_sum = [hist_sum, sum(cate == (unique_district(i)))];
     end
     
     %choose top 10 district whose hist_sum > 5000
@@ -109,8 +111,8 @@ function [project_data, outcome_data, essay_data, donation_data, feature_name] =
            prefix_name = keep_caps(top_district(i));
            prefix_name = strcat('top_district', prefix_name);
 
-           eval(['project_data.',prefix_name,' = (project_data.school_district == top_district(i));']);
-           not_top_district_id = (not_top_district_id & ~(project_data.school_district == top_district(i)));
+           eval(['project_data.',prefix_name,' = (cate == (top_district(i)));']);
+           not_top_district_id = (not_top_district_id & ~(cate == (top_district(i))));
            feature_name = [feature_name, {prefix_name}];
        end
     end
@@ -119,12 +121,13 @@ function [project_data, outcome_data, essay_data, donation_data, feature_name] =
     project_data.not_top_district = not_top_district_id;
     project_data.school_district = [];
     
-    clear hist_sum unique_district top_district miss_prefix prefix_name not_top_district_id;
+    clear cate hist_sum unique_district top_district miss_prefix prefix_name not_top_district_id;
     
     %%
     %metro data
     subject_dict = unique(project_data.school_metro);
     miss_dict = ~ismissing(array2table(subject_dict));
+
     for i = 1:length(miss_dict)
         if miss_dict(i) == 1
             prefix_name = keep_caps(subject_dict(i));
@@ -141,8 +144,9 @@ function [project_data, outcome_data, essay_data, donation_data, feature_name] =
     %county data
     unique_county = unique(project_data.school_county);
     hist_sum = [];
+    cate = categorical(project_data.school_county);
     for i = 1:length(unique_county)
-        hist_sum = [hist_sum, sum(project_data.school_county == unique_county(i))];
+        hist_sum = [hist_sum, sum(cate == (unique_county(i)))];
     end
     
     %choose top 13 county whose hist_sum > 8000
@@ -154,8 +158,8 @@ function [project_data, outcome_data, essay_data, donation_data, feature_name] =
            prefix_name = keep_caps(top_county(i));
            prefix_name = strcat('top_county', prefix_name);
 
-           eval(['project_data.',prefix_name,' = (project_data.school_county == top_county(i));']);
-           not_top_county_id = (not_top_county_id & ~(project_data.school_county == top_county(i)));
+           eval(['project_data.',prefix_name,' = (cate == (top_county(i)));']);
+           not_top_county_id = (not_top_county_id & ~(cate == (top_county(i))));
            feature_name = [feature_name, {prefix_name}];
        end
     end
@@ -164,7 +168,7 @@ function [project_data, outcome_data, essay_data, donation_data, feature_name] =
     project_data.not_top_county = not_top_county_id;
     project_data.school_county = [];
     
-    clear hist_sum unique_district top_district miss_prefix prefix_name not_top_district_id;
+    clear cate hist_sum unique_district top_district miss_prefix prefix_name not_top_district_id;
     
     %%
     %teacher prefix
