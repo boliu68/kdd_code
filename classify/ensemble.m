@@ -5,18 +5,18 @@
 
 %    include normalization
     classify;
-    clear xTrainD xCVD;
-    
+%     clear xTrainD xCVD;
+%     
     %%
     %parameter
     opts = [];
     opts.loss = 'exploss'; % can be logloss or exploss
     % gradient boost options
-    opts.shrinkageFactor = 0.3;
+    opts.shrinkageFactor = 0.1;
     opts.subsamplingFactor = 0.5;
-    opts.maxTreeDepth = uint32(2);  % this was the default before customization
+    opts.maxTreeDepth = uint32(1);  % this was the default before customization
     opts.randSeed = uint32(rand()*1000);
-    opts.mtry = uint32(ceil(sqrt(size(NxTrainD,2)))); 
+    opts.mtry = uint32(ceil(sqrt(size(NxTrainD,2))));
     
     %%
     %classify the subtasks
@@ -26,7 +26,7 @@
     
     train_length = {};
     
-    for i = 2:8
+    for i = 2:9
         %clean the missing_data
         
         if i < 9

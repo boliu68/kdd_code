@@ -4,7 +4,7 @@ function [xTrain, yTrain, xCV, yCV, xTest, Test_projectid, features_name, respon
     %read the data
     %the feature needed to be read
     %
-    project_attribute = {'projectid','school_city' ,'school_state' ,...
+    project_attribute = {'projectid','school_latitude','school_longitude','school_city' ,'school_state' ,...
     'school_metro' ,'school_district','school_county','school_charter' ,...
     'school_magnet' ,'school_year_round' ,'school_nlns' ,...
     'school_kipp' ,'school_charter_ready_promise' ,'teacher_prefix' ,...
@@ -71,11 +71,12 @@ function [xTrain, yTrain, xCV, yCV, xTest, Test_projectid, features_name, respon
     
     %%
     %eliminate the data before date
-    Training_Data = eliminate_date(Training_Data);
-    %training_set = Training_Data.date_posted >= datenum('2010-04-14') ...
-         %& Training_Data.date_posted < datenum('2014-01-01');
-    %training_set = Training_Data.date_posted < datenum('2014-01-01');
-    %Training_Data = Training_Data(training_set, :);
+    %Training_Data = eliminate_date(Training_Data);
+    training_set = Training_Data.date_posted >= datenum('2010-04-14') ...
+         & Training_Data.date_posted < datenum('2014-01-01');
+%      test_set = Training_Data.date_posted > datenum('2013-01-01') & ...
+%          Training_Data.date_posted < datenum('2014-01-01');
+    Training_Data = Training_Data(training_set, :);
     
     %%
     %select the features and predict label
@@ -88,12 +89,17 @@ function [xTrain, yTrain, xCV, yCV, xTest, Test_projectid, features_name, respon
     
     %%
     %Cut the Cross Val
-    cv_id = cvpartition(height(Training_Data), 'holdout', 0.1);
-    xTrain = Training_Data(training(cv_id), features_name);
-    yTrain = Training_Data(training(cv_id), response_name);
+%     cv_id = cvpartition(height(Training_Data), 'holdout', 0.1);
+%     xTrain = Training_Data(training(cv_id), features_name);
+%     yTrain = Training_Data(training(cv_id), response_name);
+    cv_id = (Training_Data.date_posted <= datenum('2013-05-01'));
+    xTrain = Training_Data(~cv_id, features_name);
+    yTrain = Training_Data(~cv_id, response_name);
     
-    xCV = Training_Data(test(cv_id), features_name);
-    yCV = Training_Data(test(cv_id), response_name);
+%     xCV = Training_Data(test(cv_id), features_name);
+%     yCV = Training_Data(test(cv_id), response_name);
+    xCV = Training_Data(cv_id, features_name);
+    yCV = Training_Data(cv_id, response_name);
     
     xTest = Test_Data(:, features_name);
     Test_projectid = Test_Data.projectid;
